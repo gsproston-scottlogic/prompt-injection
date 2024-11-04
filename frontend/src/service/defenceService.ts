@@ -75,13 +75,19 @@ async function resetDefenceConfigItem(
 	defenceId: DEFENCE_ID,
 	configItemId: DEFENCE_CONFIG_ITEM_ID,
 	level: LEVEL_NAMES
-): Promise<DefenceResetResponse> {
-	const response = await post(`${PATH}/resetConfig`, {
+): Promise<DefenceResetResponse | null> {
+	return post(`${PATH}/resetConfig`, {
 		defenceId,
 		configItemId,
 		level,
-	});
-	return (await response.json()) as DefenceResetResponse;
+	}).then(
+		async (response) => {
+			return (await response.json()) as DefenceResetResponse;
+		},
+		async () => {
+			return null;
+		}
+	);
 }
 
 function validatePositiveNumberConfig(value: string) {

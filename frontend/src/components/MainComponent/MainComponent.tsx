@@ -226,6 +226,13 @@ function MainComponent({
 			configItemId,
 			currentLevel
 		);
+		if (!resetDefence) {
+			addChatMessage({
+				message: 'Failed to reset defence configuration. Please try again.',
+				type: 'ERROR_MSG',
+			});
+			return;
+		}
 		addConfigUpdateToChat(defenceId, 'reset');
 		// update state
 		const newDefences = defences.map((defence) => {
