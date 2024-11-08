@@ -84,8 +84,8 @@ async function resetDefenceConfigItem(
 		async (response) => {
 			return (await response.json()) as DefenceResetResponse;
 		},
-		async () => {
-			return await null;
+		() => {
+			return null;
 		}
 	);
 }
